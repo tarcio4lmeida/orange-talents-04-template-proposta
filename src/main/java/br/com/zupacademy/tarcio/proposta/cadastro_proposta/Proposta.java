@@ -19,7 +19,7 @@ public class Proposta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique=true)
 	private String documento;
 	
 	@Column(nullable = false)

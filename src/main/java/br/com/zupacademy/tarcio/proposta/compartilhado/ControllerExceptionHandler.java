@@ -11,6 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.zupacademy.tarcio.proposta.cadastro_proposta.CadastradoDocumentoException;
+
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
@@ -31,4 +33,17 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(status).body(erro);
 	}
 	
+	@ExceptionHandler(CadastradoDocumentoException.class)
+	public ResponseEntity<ErroPadrao> documentoJaCadastradoException(CadastradoDocumentoException e, HttpServletRequest request){
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		ErroPadrao erro = new ErroPadrao();
+		
+		erro.setTimestamp(Instant.now());
+		erro.setStatus(status.value());
+		erro.setErro("Cadastro Documento exception");
+		erro.setMensagem(e.getMessage());
+		erro.setPath(request.getRequestURI());
+
+		return ResponseEntity.status(status).body(erro);
+	}
 }

@@ -23,11 +23,20 @@ public class PropostaController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PropostaResponse> cadastrar(@RequestBody @Valid PropostaRequest request) {
+		this.validaDocumento(request);
+		
 		Proposta proposta = request.toModel();
 		repository.save(proposta);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(proposta.getId()).toUri();
 		
 		return ResponseEntity.created(uri).body(new PropostaResponse(proposta));
+	}
+	
+	public void validaDocumento(PropostaRequest request) {
+		boolean existe = repository.existsByDocumento(request.getDocumento());
+		if (existe) {
+			throw new CadastradoDocumentoException("Documento já cadastrado");
+		}
 	}
 
 }
