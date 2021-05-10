@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +35,9 @@ public class Proposta implements Serializable {
 	
 	@Column(nullable = false)
 	private BigDecimal salario;
+	
+	@Enumerated(EnumType.STRING)
+	private Situacao situacao = Situacao.NAO_AVALIADO;
 	
 	@Deprecated
 	public Proposta() {
@@ -69,5 +74,14 @@ public class Proposta implements Serializable {
 	public String getDocumento() {
 		return documento;
 	}
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
+	}
+	
 	
 }

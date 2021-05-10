@@ -29,6 +29,7 @@ public class PropostaRequest {
 	@Positive(message = "{campo.salario.positivo}")
 	private BigDecimal salario;
 	
+
 	public Proposta toModel() {
 		return new Proposta(this.documento, this.nome, this.email, this.endereco, this.salario);
 	}
