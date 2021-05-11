@@ -1,6 +1,7 @@
 package br.com.zupacademy.tarcio.proposta.cadastro_proposta;
 
 import java.net.URI;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -10,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +47,16 @@ public class PropostaController {
 		return ResponseEntity.created(uri).body(new ResultadoAnalise(proposta));
 	}
 	
+	@GetMapping("/{id}")
+	@Transactional
+	public ResponseEntity<PropostaResponse> detalhar(@PathVariable("id") Long id) {
+		Optional<Proposta> optProposta = repository.findById(id);
+		if(optProposta.isPresent()) {
+			return ResponseEntity.ok(new PropostaResponse(optProposta.get()));
+		}
+		return ResponseEntity.notFound().build();
+	}
+	
 	private void validaDocumento(PropostaRequest request) {
 		boolean existe = repository.existsByDocumento(request.getDocumento());
 		if (existe) {
@@ -64,5 +77,4 @@ public class PropostaController {
 			proposta.setSituacao(Situacao.NAO_ELEGIVEL);
 		}
 	}
-	
 }
