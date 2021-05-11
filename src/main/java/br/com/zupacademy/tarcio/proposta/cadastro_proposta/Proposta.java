@@ -39,6 +39,8 @@ public class Proposta implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao = Situacao.NAO_AVALIADO;
 	
+	private String idCartao;
+	
 	@Deprecated
 	public Proposta() {
 	}
@@ -82,6 +84,13 @@ public class Proposta implements Serializable {
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
-	
+
+	public String getIdCartao() {
+		return idCartao;
+	}
+
+	public void setIdCartao(String idCartao) {
+		this.idCartao = idCartao;
+	}
 	
 }
