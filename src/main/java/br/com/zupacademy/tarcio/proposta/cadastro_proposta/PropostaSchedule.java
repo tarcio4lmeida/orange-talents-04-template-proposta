@@ -37,7 +37,7 @@ public class PropostaSchedule {
 		logger.info("Iniciando associação de Proposta com cartão");
 		for (Proposta proposta : propostasParaAnalise) {
 			try {
-				NumeroCartaoResponse cartaoResponse = verificador.getNumeroCartao(new NumeroCartaoRequest(proposta));
+				NumeroCartaoResponse cartaoResponse = verificador.getNumeroCartao(proposta.getId());
 				logger.info("Asssociando cartão {} para a proposta {} ", cartaoResponse.getId(), proposta.getId());
 
 				proposta.setIdCartao(cartaoResponse.getId());
