@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.zupacademy.tarcio.proposta.cadastro_cartao.NumeroCartaoResponse;
-import br.com.zupacademy.tarcio.proposta.cadastro_cartao.NumeroCartaoRequest;
 import br.com.zupacademy.tarcio.proposta.cadastro_cartao.VerificaExistenciaNumeroCartaoClient;
 import feign.FeignException;
 
@@ -26,8 +25,8 @@ public class PropostaSchedule {
 	@Autowired
 	private VerificaExistenciaNumeroCartaoClient verificador;
 
-	@Scheduled(cron = "*/30 * * * * *") 
-	private void associarCartaoComPropostasAprovadas() {
+	@Scheduled(cron = "0 */2 * ? * *") 
+	private void associarNumeroCartaoComPropostasAprovadas() {
 		List<Proposta> propostasParaAnalise = repository.propostasAprovadasSemCartao();
 		logger.info("Existem {} propostas para analise", propostasParaAnalise.size());
 		if (propostasParaAnalise.size() < 5) {

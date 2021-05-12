@@ -34,7 +34,6 @@ public class PropostaController {
 	static final Logger logger = LogManager.getLogger(PropostaController.class.getName());
 
 	@PostMapping
-	@Transactional
 	public ResponseEntity<ResultadoAnalise> cadastrar(@RequestBody @Valid PropostaRequest request) {
 		this.validaDocumento(request);
 		
@@ -42,6 +41,7 @@ public class PropostaController {
 		repository.save(proposta);
 		
 		this.analisaResultadoProposta(proposta);
+		repository.save(proposta);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(proposta.getId()).toUri();
 		return ResponseEntity.created(uri).body(new ResultadoAnalise(proposta));
@@ -75,6 +75,10 @@ public class PropostaController {
 		} catch (FeignException.UnprocessableEntity e) {
 			logger.error("Proposta {} não elegível!", proposta.getId());
 			proposta.setSituacao(Situacao.NAO_ELEGIVEL);
+		
+		} catch (Exception e) {
+			logger.error("deu pau! message {}", e.getMessage());
+			logger.error("deu pau! cause {}", e.getCause());
 		}
 	}
 }
