@@ -12,7 +12,7 @@ public interface PropostaRepository extends JpaRepository<Proposta, Long> {
 	boolean existsByDocumento(String documento);
 	
 	@Query("SELECT p FROM Proposta p WHERE p.situacao = 'ELEGIVEL' "
-			+ "AND p.idCartao = NULL")
+			+ "AND p.cartao.id = NULL")
 	List<Proposta> propostasAprovadasSemCartao();
 
 }

@@ -17,12 +17,22 @@ public class Cartao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private String numero; 
+	
+	public Cartao(String numero) {
+		this.numero = numero;
+	}
+
 	@Deprecated
 	public Cartao() {
 	}
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getNumero() {
+		return numero;
 	}
 	
 	

@@ -3,6 +3,7 @@ package br.com.zupacademy.tarcio.proposta.cadastro_proposta;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.zupacademy.tarcio.proposta.cadastro_cartao.Cartao;
 
 @Entity
 @Table(name = "tb_proposta")
@@ -39,7 +43,8 @@ public class Proposta implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao = Situacao.NAO_AVALIADO;
 	
-	private String idCartao;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Cartao cartao;
 	
 	@Deprecated
 	public Proposta() {
@@ -85,12 +90,12 @@ public class Proposta implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public String getIdCartao() {
-		return idCartao;
+	public Cartao getCartao() {
+		return cartao;
 	}
 
-	public void setIdCartao(String idCartao) {
-		this.idCartao = idCartao;
+	public void setCartao(Cartao cartao) {
+		this.cartao = cartao;
 	}
 	
 }

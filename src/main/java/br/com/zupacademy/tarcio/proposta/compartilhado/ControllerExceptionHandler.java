@@ -3,7 +3,6 @@ package br.com.zupacademy.tarcio.proposta.compartilhado;
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.zupacademy.tarcio.proposta.cadastro_proposta.CadastradoDocumentoException;
-import feign.FeignException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {

@@ -75,10 +75,6 @@ public class PropostaController {
 		} catch (FeignException.UnprocessableEntity e) {
 			logger.error("Proposta {} não elegível!", proposta.getId());
 			proposta.setSituacao(Situacao.NAO_ELEGIVEL);
-		
-		} catch (Exception e) {
-			logger.error("deu pau! message {}", e.getMessage());
-			logger.error("deu pau! cause {}", e.getCause());
 		}
 	}
 }

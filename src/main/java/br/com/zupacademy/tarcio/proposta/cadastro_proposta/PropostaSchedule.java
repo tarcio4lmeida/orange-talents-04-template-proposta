@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import br.com.zupacademy.tarcio.proposta.cadastro_cartao.Cartao;
 import br.com.zupacademy.tarcio.proposta.cadastro_cartao.NumeroCartaoResponse;
 import br.com.zupacademy.tarcio.proposta.cadastro_cartao.VerificaExistenciaNumeroCartaoClient;
 import feign.FeignException;
@@ -38,8 +39,9 @@ public class PropostaSchedule {
 			try {
 				NumeroCartaoResponse cartaoResponse = verificador.getNumeroCartao(proposta.getId());
 				logger.info("Asssociando cartão {} para a proposta {} ", cartaoResponse.getId(), proposta.getId());
-
-				proposta.setIdCartao(cartaoResponse.getId());
+				Cartao cartao = new Cartao(cartaoResponse.getId());
+				proposta.setCartao(cartao);
+				
 				repository.save(proposta);
 			} catch (FeignException.UnprocessableEntity e) {
 				logger.error("Falha na atualizacao para a proposta de id {}", proposta.getId());
