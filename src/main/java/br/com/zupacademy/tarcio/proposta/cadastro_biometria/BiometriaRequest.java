@@ -9,7 +9,7 @@ import br.com.zupacademy.tarcio.proposta.cadastro_cartao.Cartao;
 public class BiometriaRequest {
 	
 	@NotBlank(message = "{campo.biometria.obrigatorio}")
-	String biometria;
+	private String biometria;
 	
 	public BiometriaRequest() {
 	}
