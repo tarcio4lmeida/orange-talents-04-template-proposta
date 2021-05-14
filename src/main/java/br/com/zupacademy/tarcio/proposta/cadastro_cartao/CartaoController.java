@@ -64,7 +64,7 @@ public class CartaoController {
 			logger.info("Cartão {} bloqueado!", numero);
 			bloqueioRepository.save(bloqueio);
 		}catch(FeignException e){
-			logger.info("Falha no bloqueio do cartão {}", numero);
+			logger.error("Falha no bloqueio do cartão {}", numero);
 			return ResponseEntity.unprocessableEntity().build();
 		}
 		
