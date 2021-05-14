@@ -1,8 +1,12 @@
 package br.com.zupacademy.tarcio.proposta.cadastro_cartao;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,14 +23,24 @@ public class Cartao implements Serializable {
 	
 	private String numero; 
 	
+	@Enumerated(EnumType.STRING)
+	private Status status = Status.ATIVO;
+	
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private LocalDateTime  dataBloqueio;
+	
 	public Cartao(String numero) {
 		this.numero = numero;
 	}
-
+	
 	@Deprecated
 	public Cartao() {
 	}
-
+	
+	public boolean isBloqueado() {
+		return this.status.name() == Status.BLOQUEADO.name() ? true : false;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -34,6 +48,21 @@ public class Cartao implements Serializable {
 	public String getNumero() {
 		return numero;
 	}
-	
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public LocalDateTime  getDataBloqueio() {
+		return dataBloqueio;
+	}
+
+	public void setDataBloqueio(LocalDateTime dataBloqueio) {
+		this.dataBloqueio = dataBloqueio;
+	}
 	
 }
