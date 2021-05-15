@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zupacademy.tarcio.proposta.cadastro_bloqueio.Bloqueio;
 import br.com.zupacademy.tarcio.proposta.cadastro_bloqueio.BloqueioRepository;
-import br.com.zupacademy.tarcio.proposta.cadastro_bloqueio.NotificaBloqueioCartaoClient;
-import br.com.zupacademy.tarcio.proposta.cadastro_bloqueio.NotificaBloqueioRequest;
-import br.com.zupacademy.tarcio.proposta.cadastro_bloqueio.NotificaBloqueioResponse;
+import br.com.zupacademy.tarcio.proposta.feign.cartao.CartaoClient;
+import br.com.zupacademy.tarcio.proposta.feign.cartao.NotificaBloqueioRequest;
+import br.com.zupacademy.tarcio.proposta.feign.cartao.NotificaBloqueioResponse;
 import feign.FeignException;
 
 @RestController
@@ -35,7 +35,7 @@ public class CartaoController {
 	private BloqueioRepository bloqueioRepository;
 	
 	@Autowired
-	private NotificaBloqueioCartaoClient notificaBloqueioCartaoClient;
+	private CartaoClient notificaBloqueioCartaoClient;
 	
 	static final Logger logger = LogManager.getLogger(CartaoController.class.getName());
 	

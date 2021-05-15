@@ -1,4 +1,4 @@
-package br.com.zupacademy.tarcio.proposta.cadastro_proposta;
+package br.com.zupacademy.tarcio.proposta.schedule;
 
 import java.util.List;
 
@@ -10,8 +10,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.zupacademy.tarcio.proposta.cadastro_cartao.Cartao;
-import br.com.zupacademy.tarcio.proposta.cadastro_cartao.NumeroCartaoResponse;
-import br.com.zupacademy.tarcio.proposta.cadastro_cartao.VerificaExistenciaNumeroCartaoClient;
+import br.com.zupacademy.tarcio.proposta.cadastro_proposta.Proposta;
+import br.com.zupacademy.tarcio.proposta.cadastro_proposta.PropostaRepository;
+import br.com.zupacademy.tarcio.proposta.feign.cartao.CartaoClient;
+import br.com.zupacademy.tarcio.proposta.feign.cartao.NumeroCartaoResponse;
 import feign.FeignException;
 
 @Component
@@ -24,7 +26,7 @@ public class PropostaSchedule {
 	static final Logger logger = LogManager.getLogger(PropostaSchedule.class.getName());
 
 	@Autowired
-	private VerificaExistenciaNumeroCartaoClient verificador;
+	private CartaoClient verificador;
 
 	@Scheduled(cron = "0 */2 * ? * *") 
 	private void associarNumeroCartaoComPropostasAprovadas() {

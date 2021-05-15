@@ -1,4 +1,4 @@
-package br.com.zupacademy.tarcio.proposta.compartilhado;
+package br.com.zupacademy.tarcio.proposta.configuracao;
 
 import java.util.Locale;
 

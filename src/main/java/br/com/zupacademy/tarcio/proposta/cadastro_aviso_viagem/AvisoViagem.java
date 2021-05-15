@@ -27,7 +27,7 @@ public class AvisoViagem implements Serializable {
 	private String destino; 
 	
 	@Column(nullable = false)
-	private LocalDate dataTermino;
+	private LocalDate validoAte;
 	
 	@Column(nullable = false)
 	private Instant dataCriacao = Instant.now();
@@ -45,10 +45,10 @@ public class AvisoViagem implements Serializable {
 	public AvisoViagem() {
 	}
 	
-	public AvisoViagem(String destino, LocalDate dataTermino, String ipCliente, String userAgent,
+	public AvisoViagem(String destino, LocalDate validoAte, String ipCliente, String userAgent,
 			Cartao cartao) {
 		this.destino = destino;
-		this.dataTermino = dataTermino;
+		this.validoAte = validoAte;
 		this.ipCliente = ipCliente;
 		this.userAgent = userAgent;
 		this.cartao = cartao;
@@ -58,8 +58,8 @@ public class AvisoViagem implements Serializable {
 		return destino;
 	}
 
-	public LocalDate getDataTermino() {
-		return dataTermino;
+	public LocalDate getValidoAte() {
+		return validoAte;
 	}
 
 	public Instant getDataCriacao() {

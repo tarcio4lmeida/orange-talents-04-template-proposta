@@ -1,4 +1,4 @@
-package br.com.zupacademy.tarcio.proposta.cadastro_bloqueio;
+package br.com.zupacademy.tarcio.proposta.feign.cartao;
 
 public class NotificaBloqueioResponse {
 	

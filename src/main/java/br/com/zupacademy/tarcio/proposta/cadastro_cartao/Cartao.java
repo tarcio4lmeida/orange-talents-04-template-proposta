@@ -3,7 +3,6 @@ package br.com.zupacademy.tarcio.proposta.cadastro_cartao;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,7 +25,6 @@ public class Cartao implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
 	
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private LocalDateTime  dataBloqueio;
 	
 	public Cartao(String numero) {

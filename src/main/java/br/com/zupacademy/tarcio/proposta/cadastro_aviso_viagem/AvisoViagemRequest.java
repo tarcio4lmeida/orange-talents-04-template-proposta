@@ -17,28 +17,28 @@ public class AvisoViagemRequest implements Serializable {
 	private String destino; 
 	
 	@FutureOrPresent(message = "{campo.dataTermino.tempo}")
-	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-	private LocalDate dataTermino;
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+	private LocalDate validoAte;
 	
 	@Deprecated
 	public AvisoViagemRequest() {
 	}
 	
-	public AvisoViagemRequest(String destino, LocalDate dataTermino) {
+	public AvisoViagemRequest(String destino, LocalDate validoAte) {
 		this.destino = destino;
-		this.dataTermino = dataTermino;
+		this.validoAte = validoAte;
 	}
 
 	public String getDestino() {
 		return destino;
 	}
 
-	public LocalDate getDataTermino() {
-		return dataTermino;
+	public LocalDate getValidoAte() {
+		return validoAte;
 	}
 
 	public AvisoViagem toModel(Cartao cartao, String ipCliente, String userAgent) {
-		return new AvisoViagem(this.destino, this.dataTermino, ipCliente, userAgent, cartao);
+		return new AvisoViagem(this.destino, this.validoAte, ipCliente, userAgent, cartao);
 	}
 
 }

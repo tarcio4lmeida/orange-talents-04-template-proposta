@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.zupacademy.tarcio.proposta.feign.analise.AnaliseClient;
+import br.com.zupacademy.tarcio.proposta.feign.analise.ResultadoAnalise;
+import br.com.zupacademy.tarcio.proposta.feign.analise.SolicitacaoAnalise;
 import feign.FeignException;
 
 @RestController
@@ -29,7 +32,7 @@ public class PropostaController {
 	private PropostaRepository repository;
 	
 	@Autowired
-	private SolicitacaoCartaoClient solicitacao;
+	private AnaliseClient solicitacao;
 
 	static final Logger logger = LogManager.getLogger(PropostaController.class.getName());
 

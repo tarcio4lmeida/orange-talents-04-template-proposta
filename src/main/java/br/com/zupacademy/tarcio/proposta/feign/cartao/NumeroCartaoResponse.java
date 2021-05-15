@@ -1,4 +1,4 @@
-package br.com.zupacademy.tarcio.proposta.cadastro_cartao;
+package br.com.zupacademy.tarcio.proposta.feign.cartao;
 
 import java.io.Serializable;
 

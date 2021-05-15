@@ -1,4 +1,6 @@
-package br.com.zupacademy.tarcio.proposta.cadastro_proposta;
+package br.com.zupacademy.tarcio.proposta.feign.analise;
+
+import br.com.zupacademy.tarcio.proposta.cadastro_proposta.Proposta;
 
 public class ResultadoAnalise {
 	
