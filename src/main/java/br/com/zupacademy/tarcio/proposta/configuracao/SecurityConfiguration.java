@@ -23,6 +23,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .antMatchers(HttpMethod.PUT, "/cartoes/**").hasAuthority("SCOPE_nossocartao")
                                 
                                 .antMatchers(HttpMethod.POST, "/aviso-viagens").hasAuthority("SCOPE_nossocartao")
+                                
+                                .antMatchers(HttpMethod.POST, "/carteira-digitais").hasAuthority("SCOPE_nossocartao")
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
