@@ -31,7 +31,6 @@ public class CarteiraDigital implements Serializable {
 	private TipoCarteira carteira; 
 	
 	@ManyToOne
-	@Column(nullable = false)
 	private Cartao cartao;
 	
 	@Deprecated

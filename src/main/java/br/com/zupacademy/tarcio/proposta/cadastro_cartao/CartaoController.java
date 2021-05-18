@@ -10,7 +10,9 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +43,8 @@ public class CartaoController {
 	
 	@PutMapping("/{numero}")
 	@Transactional
-	public ResponseEntity<?> bloquearCartao(@PathVariable("numero") String numero, @RequestBody @Valid NotificaBloqueioRequest notificaBloqueioRequest, HttpServletRequest request) {
+	public ResponseEntity<?> bloquearCartao(@PathVariable("numero") String numero, @RequestBody @Valid NotificaBloqueioRequest notificaBloqueioRequest,
+			HttpServletRequest request) {
 		
 		Optional<Cartao> optCartao = cartaoRepository.findByNumero(numero);
 		if(optCartao.isEmpty()) {
@@ -52,6 +55,11 @@ public class CartaoController {
 		if(cartao.isBloqueado()) {
 			return ResponseEntity.unprocessableEntity().body("O cartão já está bloqueado!");
 		}
+		
+		if(!cartao.isDonoCartao()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Não autorizado para esse tipo de solicitação");
+		}
+		
 		NotificaBloqueioResponse notificaBloqueioResponse = null;
 		try {
 			logger.info("Notificando o sistema legado da tentativa de bloqueio do Cartão {}", numero);

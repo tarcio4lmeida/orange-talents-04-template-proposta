@@ -29,7 +29,7 @@ public class PropostaSchedule {
 	private CartaoClient verificador;
 
 	@Scheduled(cron = "0 */2 * ? * *") 
-	private void associarNumeroCartaoComPropostasAprovadas() {
+	public void associarNumeroCartaoComPropostasAprovadas() {
 		List<Proposta> propostasParaAnalise = repository.propostasAprovadasSemCartao();
 		logger.info("Existem {} propostas para analise", propostasParaAnalise.size());
 		if (propostasParaAnalise.size() < 5) {
@@ -41,7 +41,7 @@ public class PropostaSchedule {
 			try {
 				NumeroCartaoResponse cartaoResponse = verificador.getNumeroCartao(proposta.getId());
 				logger.info("Asssociando cartão {} para a proposta {} ", cartaoResponse.getId(), proposta.getId());
-				Cartao cartao = new Cartao(cartaoResponse.getId());
+				Cartao cartao = new Cartao(cartaoResponse.getId(), proposta);
 				proposta.setCartao(cartao);
 				
 				repository.save(proposta);
