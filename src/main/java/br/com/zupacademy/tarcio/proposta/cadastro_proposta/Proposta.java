@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.zupacademy.tarcio.proposta.cadastro_cartao.Cartao;
+import br.com.zupacademy.tarcio.proposta.configuracao.CriptografiaConfiguration;
 
 @Entity
 @Table(name = "tb_proposta")
@@ -26,6 +28,7 @@ public class Proposta implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false, unique=true)
+	@Convert(converter = CriptografiaConfiguration.class)
 	private String documento;
 	
 	@Column(nullable = false)
